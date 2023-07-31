@@ -2,16 +2,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, VStack } from "native-base";
 import { FormProvider, useForm } from "react-hook-form";
 import InputText from "../../../components/form/inputText";
-import { CHANGE_PASSWORD } from "../../../navigation/routesNames";
-import { LoginRouteProps } from "../../../navigation/types";
+import { ChangePasswordRouteProps } from "../../../navigation/types";
 import LayoutAuth from "../layout";
-import { LoginForm, initLoginForm, loginForm } from "./model";
+import {
+  ChangePasswordForm,
+  changePasswordForm,
+  initChangePasswordForm,
+} from "./model";
 
-export default function LoginScreen({ navigation }: LoginRouteProps) {
-  const methods = useForm<LoginForm>({
+export default function ChangePasswordScreen({
+  navigation,
+}: ChangePasswordRouteProps) {
+  const methods = useForm<ChangePasswordForm>({
     mode: "onTouched",
-    resolver: zodResolver(loginForm),
-    defaultValues: initLoginForm,
+    resolver: zodResolver(changePasswordForm),
+    defaultValues: initChangePasswordForm,
   });
 
   const {
@@ -20,22 +25,26 @@ export default function LoginScreen({ navigation }: LoginRouteProps) {
   } = methods;
 
   const onSubmit = async (e: any) => {
-    navigation.replace(CHANGE_PASSWORD);
+    console.log(e, "e");
   };
 
   return (
-    <LayoutAuth title="Welcome" subtitle="Sign in to continue!">
+    <LayoutAuth title="Change Password" subtitle="this for new user">
       <FormProvider {...methods}>
         <VStack space={3} mt="5">
-          <InputText label="Email" name="email" />
           <InputText label="Password" name="password" type="password" />
+          <InputText
+            label="Password Confirmation"
+            name="password_confirmation"
+            type="password"
+          />
 
           <Button
             disabled={isSubmitting}
             mt="2"
             onPress={handleSubmit(onSubmit)}
           >
-            Sign in
+            Change Password
           </Button>
         </VStack>
       </FormProvider>

@@ -6,4 +6,9 @@ export type LoginRouteProps = NativeStackScreenProps<
   "Login"
 >;
 
+export type ChangePasswordRouteProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Change Password"
+>;
+
 export type HomeRouteProps = NativeStackScreenProps<RootStackParamList, "Home">;
