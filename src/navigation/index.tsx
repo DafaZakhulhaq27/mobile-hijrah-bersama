@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "../pages/auth/login";
 import HomeScreen from "../pages/home";
-import LoginScreen from "../pages/login";
 import { HOME_ROUTE, LOGIN_ROUTE } from "./routesNames";
 
 export type RootStackParamList = {
