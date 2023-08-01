@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, VStack } from "native-base";
 import { FormProvider, useForm } from "react-hook-form";
 import InputText from "../../../components/form/inputText";
+import { HOME_ROUTE } from "../../../navigation/routesNames";
 import { ChangePasswordRouteProps } from "../../../navigation/types";
 import LayoutAuth from "../layout";
 import {
@@ -25,7 +26,7 @@ export default function ChangePasswordScreen({
   } = methods;
 
   const onSubmit = async (e: any) => {
-    console.log(e, "e");
+    navigation.replace(HOME_ROUTE);
   };
 
   return (

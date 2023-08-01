@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import { NativeBaseProvider, extendTheme } from "native-base";
 import React from "react";
 import RootNavigation from "./src/navigation";

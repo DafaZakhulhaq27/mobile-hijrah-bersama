@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, VStack } from "native-base";
 import { FormProvider, useForm } from "react-hook-form";
 import InputText from "../../../components/form/inputText";
-import { CHANGE_PASSWORD } from "../../../navigation/routesNames";
+import { CHANGE_PASSWORD_ROUTE } from "../../../navigation/routesNames";
 import { LoginRouteProps } from "../../../navigation/types";
 import LayoutAuth from "../layout";
 import { LoginForm, initLoginForm, loginForm } from "./model";
@@ -20,7 +20,7 @@ export default function LoginScreen({ navigation }: LoginRouteProps) {
   } = methods;
 
   const onSubmit = async (e: any) => {
-    navigation.replace(CHANGE_PASSWORD);
+    navigation.replace(CHANGE_PASSWORD_ROUTE);
   };
 
   return (
