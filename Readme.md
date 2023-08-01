@@ -12,6 +12,8 @@ yarn start
 * [Native Base](https://nativebase.io/) - UI Framework
 * [React Hook Form](https://react-hook-form.com/) - Form Handler Library
 * [Zod](https://zod.dev/) - TypeScript Schema
+* [Expo](https://docs.expo.dev/) - React Native Development Run Time
+
 
 
 
