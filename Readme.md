@@ -1,9 +1,17 @@
-# NativeBase TypeScript Expo Template
+## Mobile Hijrah Bersama
 
-The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
+## Getting Started
 
-## Usage
-
-```sh
-expo init my-app --template @native-base/expo-template-typescript
+```bash
+yarn i
+yarn start
 ```
+## Built With
+* [React Native](https://reactnative.dev/) - React Framework
+* [React Navigation](https://reactnavigation.org/) - React Native Route Library
+* [Native Base](https://nativebase.io/) - UI Framework
+* [React Hook Form](https://react-hook-form.com/) - Form Handler Library
+* [Zod](https://zod.dev/) - TypeScript Schema
+
+
+
