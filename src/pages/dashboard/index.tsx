@@ -1,25 +1,34 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   DrawerContentComponentProps,
+  DrawerContentScrollView,
   DrawerItem,
+  DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
 import { Icon, Pressable } from "native-base";
+import { COLOR_PRIMARY } from "../../config/constant";
+import {
+  CART_ROUTE,
+  HOME_ROUTE,
+  PRODUCTS_ROUTE,
+} from "../../navigation/routesNames";
+import { DashboardRouteProps } from "../../navigation/types";
 import Home from "./home";
+import ProductsScreen from "./products";
 
 export type DashboardStackParamList = {
   [HOME_ROUTE]: undefined;
+  [PRODUCTS_ROUTE]:
+    | {
+        _id: string;
+        icon: string;
+        name: string;
+      }
+    | undefined;
 };
 
 const Drawer = createDrawerNavigator<DashboardStackParamList>();
-
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-} from "@react-navigation/drawer";
-import { COLOR_PRIMARY } from "../../config/constant";
-import { CART_ROUTE, HOME_ROUTE } from "../../navigation/routesNames";
-import { DashboardRouteProps } from "../../navigation/types";
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
@@ -54,7 +63,8 @@ export default function DashboardScreen({ navigation }: DashboardRouteProps) {
       }}
       drawerContent={CustomDrawerContent}
     >
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name={HOME_ROUTE} component={Home} />
+      <Drawer.Screen name={PRODUCTS_ROUTE} component={ProductsScreen} />
     </Drawer.Navigator>
   );
 }
