@@ -42,6 +42,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
 export default function DashboardScreen({ navigation }: DashboardRouteProps) {
   return (
     <Drawer.Navigator
+      initialRouteName={PRODUCTS_ROUTE}
       useLegacyImplementation
       screenOptions={{
         headerTitle: "Hijrah Bersama",

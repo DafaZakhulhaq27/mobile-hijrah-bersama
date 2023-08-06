@@ -17,8 +17,8 @@ export default function Home({ navigation }: HomeRouteProps) {
         onPress={() =>
           navigation.navigate(PRODUCTS_ROUTE, {
             _id: "test",
-            icon: "test",
-            name: "test",
+            icon: "https://wallpaperaccess.com/full/317501.jpg",
+            name: "Umrah Regular",
           })
         }
         icon="https://wallpaperaccess.com/full/317501.jpg"
