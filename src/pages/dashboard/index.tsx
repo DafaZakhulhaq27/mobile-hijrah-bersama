@@ -17,6 +17,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { COLOR_PRIMARY } from "../../config/constant";
 import { CART_ROUTE, HOME_ROUTE } from "../../navigation/routesNames";
 import { DashboardRouteProps } from "../../navigation/types";
 
@@ -35,7 +36,11 @@ export default function DashboardScreen({ navigation }: DashboardRouteProps) {
       useLegacyImplementation
       screenOptions={{
         headerTitle: "Hijrah Bersama",
-        drawerActiveTintColor: "#06b6d4",
+        headerTitleStyle: {
+          color: "black",
+        },
+        headerTintColor: COLOR_PRIMARY,
+        drawerActiveTintColor: COLOR_PRIMARY,
         headerRight: () => (
           <Pressable onPress={() => navigation.push(CART_ROUTE)} mr="1">
             <Icon
