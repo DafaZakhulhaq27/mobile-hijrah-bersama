@@ -27,10 +27,7 @@ const dummyData = {
   is_sold: false, // default false
 };
 
-export default function ProductsScreen({
-  route,
-  navigation,
-}: ProductsRouteProps) {
+export default function ProductsScreen({ route }: ProductsRouteProps) {
   return (
     <ContentWrapper>
       {route.params ? (

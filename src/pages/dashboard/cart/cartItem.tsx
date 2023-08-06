@@ -2,14 +2,14 @@ import { Box, Button, Divider, Flex, Text } from "native-base";
 import LabelValue from "../../../components/labelValue";
 import { Product } from "../../../models/cart";
 
-export default function ProductItem({
-  _id,
-  price,
-  seat,
-  program,
-  is_added_cart,
-  schedule,
-}: Product) {
+type Props = {
+  _id: string;
+  product: Product;
+};
+
+export default function CartItem({ _id, product }: Props) {
+  const { program, seat, price, schedule } = product;
+
   return (
     <>
       <Divider />
@@ -33,7 +33,9 @@ export default function ProductItem({
             </>
           }
         />
-        {!is_added_cart && <Button mt="2">Add to Cart</Button>}
+        <Button mt="2" colorScheme="danger">
+          Remove Item
+        </Button>
       </Box>
       <Divider />
     </>
