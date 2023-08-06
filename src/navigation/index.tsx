@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import ChangePasswordScreen from "../pages/auth/changePassword";
 import LoginScreen from "../pages/auth/login";
 import DashboardScreen from "../pages/dashboard";
@@ -23,7 +24,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function RootNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={CART_ROUTE}>
+      <Stack.Navigator initialRouteName={LOGIN_ROUTE}>
         <Stack.Screen name={LOGIN_ROUTE} component={LoginScreen} />
         <Stack.Screen
           name={DASHBOARD_ROUTE}

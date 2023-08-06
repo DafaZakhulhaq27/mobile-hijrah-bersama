@@ -6,7 +6,7 @@ import {
   DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
-import { Icon, Pressable } from "native-base";
+import { Divider, Icon, Pressable, Text } from "native-base";
 import { COLOR_PRIMARY } from "../../config/constant";
 import {
   CART_ROUTE,
@@ -34,6 +34,10 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
+      <Text mx={3} fontWeight="bold">
+        Categories :
+      </Text>
+      <Divider mt={2} />
       <DrawerItem label="Help" onPress={() => alert("halo")} />
     </DrawerContentScrollView>
   );
@@ -42,7 +46,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
 export default function DashboardScreen({ navigation }: DashboardRouteProps) {
   return (
     <Drawer.Navigator
-      initialRouteName={PRODUCTS_ROUTE}
+      initialRouteName={HOME_ROUTE}
       useLegacyImplementation
       screenOptions={{
         headerTitle: "Hijrah Bersama",
