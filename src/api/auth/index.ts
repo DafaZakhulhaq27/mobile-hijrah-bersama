@@ -1,4 +1,6 @@
-import fetcher from "../../config/fetcher";
+import { ChangePasswordForm } from "../../pages/auth/changePassword/model";
+import { fetcher } from "../../utils/fetcher";
+import { LoginData } from "./model";
 
 type LoginForm = {
   email: string;
@@ -6,6 +8,20 @@ type LoginForm = {
   fb_token: string;
 };
 
-export async function login(form: LoginForm) {
-  const res = fetcher.post("/v1/auth/login", { form });
-}
+export const login = async (data: LoginForm) =>
+  fetcher<LoginData>({
+    path: "/v1/auth/login",
+    options: {
+      method: "POST",
+      body: data,
+    },
+  });
+
+export const changePassword = async (data: ChangePasswordForm) =>
+  fetcher<LoginData>({
+    path: "/v1/auth/change_password",
+    options: {
+      method: "POST",
+      body: data,
+    },
+  });

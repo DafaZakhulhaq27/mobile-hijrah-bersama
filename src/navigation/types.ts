@@ -6,15 +6,26 @@ export type LoginRouteProps = NativeStackScreenProps<
   RootStackParamList,
   "Login"
 >;
-
 export type ChangePasswordRouteProps = NativeStackScreenProps<
   RootStackParamList,
   "Change Password"
 >;
-
-export type DashboardRouteProps = NativeStackScreenProps<RootStackParamList, "Dashboard">;
+export type DashboardRouteProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Dashboard"
+>;
 export type CartRouteProps = NativeStackScreenProps<RootStackParamList, "Cart">;
+export type OrderRouteProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Order"
+>;
 
 // DASHBOARD DRAWER
-export type HomeRouteProps = NativeStackScreenProps<DashboardStackParamList, "Home">;
-export type ProductsRouteProps = NativeStackScreenProps<DashboardStackParamList, "Products">;
+export type HomeRouteProps = NativeStackScreenProps<
+  DashboardStackParamList,
+  "Home"
+>;
+export type ProductsRouteProps = NativeStackScreenProps<
+  DashboardStackParamList,
+  "Products"
+>;

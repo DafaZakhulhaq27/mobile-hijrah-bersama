@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, VStack } from "native-base";
+import { Button, VStack, useToast } from "native-base";
 import { FormProvider, useForm } from "react-hook-form";
+import { changePassword } from "../../../api/auth";
 import InputText from "../../../components/form/inputText";
 import { DASHBOARD_ROUTE } from "../../../navigation/routesNames";
 import { ChangePasswordRouteProps } from "../../../navigation/types";
@@ -14,6 +15,7 @@ import {
 export default function ChangePasswordScreen({
   navigation,
 }: ChangePasswordRouteProps) {
+  const toast = useToast();
   const methods = useForm<ChangePasswordForm>({
     mode: "onTouched",
     resolver: zodResolver(changePasswordForm),
@@ -25,8 +27,20 @@ export default function ChangePasswordScreen({
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (e: any) => {
-    navigation.replace(DASHBOARD_ROUTE);
+  const onSubmit = async (data: ChangePasswordForm) => {
+    try {
+      const res = await changePassword(data);
+      if (res.status) {
+        toast.show({
+          description: "Change Password success",
+        });
+        navigation.replace(DASHBOARD_ROUTE);
+      } else {
+        alert(res.message);
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
@@ -41,7 +55,7 @@ export default function ChangePasswordScreen({
           />
 
           <Button
-            disabled={isSubmitting}
+            isLoading={isSubmitting}
             mt="2"
             onPress={handleSubmit(onSubmit)}
           >

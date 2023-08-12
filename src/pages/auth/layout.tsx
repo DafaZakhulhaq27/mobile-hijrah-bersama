@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Heading, Image } from "native-base";
+import { Box, Center, Flex, Heading, Image, ScrollView } from "native-base";
 import { ReactNode } from "react";
 import { Logo } from "../../../assets";
 import ContentWrapper from "../../components/contentWrapper";
@@ -13,8 +13,9 @@ export default function LayoutAuth({ children, title, subtitle }: Props) {
   return (
     <ContentWrapper>
       <Center w="100%">
-        <Box safeArea p="2" py="8" w="90%" maxW="290">
+        <ScrollView p="2" py="8" w="90%" maxW="290">
           <Flex
+            pt={10}
             flexDirection="row"
             justifyContent="space-between"
             alignItems="flex-end"
@@ -46,7 +47,7 @@ export default function LayoutAuth({ children, title, subtitle }: Props) {
             <Image source={Logo} alt="Alternate Text" size="sm" />
           </Flex>
           {children}
-        </Box>
+        </ScrollView>
       </Center>
     </ContentWrapper>
   );

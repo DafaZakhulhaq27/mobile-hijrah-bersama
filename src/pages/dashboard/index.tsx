@@ -1,21 +1,18 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-  createDrawerNavigator,
-} from "@react-navigation/drawer";
-import { Divider, Icon, Pressable, Text } from "native-base";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import * as SecureStore from "expo-secure-store";
+import { Flex, Icon, Pressable } from "native-base";
 import { COLOR_PRIMARY } from "../../config/constant";
 import {
   CART_ROUTE,
   HOME_ROUTE,
+  LOGIN_ROUTE,
   PRODUCTS_ROUTE,
 } from "../../navigation/routesNames";
 import { DashboardRouteProps } from "../../navigation/types";
-import Home from "./home";
-import ProductsScreen from "./products";
+import CustomDrawerContent from "./_components/customDrawerContent";
+import Home from "./_pages/home";
+import ProductsScreen from "./_pages/products";
 
 export type DashboardStackParamList = {
   [HOME_ROUTE]: undefined;
@@ -30,19 +27,6 @@ export type DashboardStackParamList = {
 
 const Drawer = createDrawerNavigator<DashboardStackParamList>();
 
-function CustomDrawerContent(props: DrawerContentComponentProps) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <Text mx={3} fontWeight="bold">
-        Categories :
-      </Text>
-      <Divider mt={2} />
-      <DrawerItem label="Help" onPress={() => alert("halo")} />
-    </DrawerContentScrollView>
-  );
-}
-
 export default function DashboardScreen({ navigation }: DashboardRouteProps) {
   return (
     <Drawer.Navigator
@@ -56,14 +40,30 @@ export default function DashboardScreen({ navigation }: DashboardRouteProps) {
         headerTintColor: COLOR_PRIMARY,
         drawerActiveTintColor: COLOR_PRIMARY,
         headerRight: () => (
-          <Pressable onPress={() => navigation.push(CART_ROUTE)} mr="1">
-            <Icon
-              as={<MaterialIcons name="shopping-cart" />}
-              size={5}
-              mr="2"
-              color="primary.500"
-            />
-          </Pressable>
+          <Flex flexDirection="row">
+            <Pressable onPress={() => navigation.push(CART_ROUTE)} mr="1.5">
+              <Icon
+                as={<MaterialIcons name="shopping-cart" />}
+                size={5}
+                mr="2"
+                color="primary.500"
+              />
+            </Pressable>
+            <Pressable
+              onPress={async () => {
+                await SecureStore.deleteItemAsync("token");
+                navigation.replace(LOGIN_ROUTE);
+              }}
+              mr="1"
+            >
+              <Icon
+                as={<MaterialIcons name="logout" />}
+                size={5}
+                mr="2"
+                color="red.500"
+              />
+            </Pressable>
+          </Flex>
         ),
       }}
       drawerContent={CustomDrawerContent}
