@@ -23,6 +23,8 @@
       }
     },
     "android": {
+      "package" : "com.hijrah.bersama",
+      "googleServicesFile" : "com.hijrah.bersama",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

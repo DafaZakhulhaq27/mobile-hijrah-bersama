@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "944822212007",
+    "project_id": "measure-app-4217d",
+    "storage_bucket": "measure-app-4217d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944822212007:android:2a06efb129a28c9cebd282",
+        "android_client_info": {
+          "package_name": "com.hijrah.bersama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944822212007-ok3aorp53drnqla908oe4ed11cq5fd4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAihWT06hn3t-a2-qtiHkX_YhYzQGyxWjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944822212007-ok3aorp53drnqla908oe4ed11cq5fd4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

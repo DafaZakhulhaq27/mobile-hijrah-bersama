@@ -6,12 +6,14 @@ import ChangePasswordScreen from "../pages/auth/changePassword";
 import LoginScreen from "../pages/auth/login";
 import DashboardScreen from "../pages/dashboard";
 import CartScreen from "../pages/dashboard/_pages/cart";
+import Notif from "../pages/dashboard/_pages/notif";
 import OrderScreen from "../pages/dashboard/_pages/order";
 import {
   CART_ROUTE,
   CHANGE_PASSWORD_ROUTE,
   DASHBOARD_ROUTE,
   LOGIN_ROUTE,
+  NOTIF_ROUTE,
   ORDER_ROUTE,
 } from "./routesNames";
 
@@ -23,6 +25,7 @@ export type RootStackParamList = {
   [ORDER_ROUTE]: {
     redirect_url: string;
   };
+  [NOTIF_ROUTE]: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -45,7 +48,7 @@ export default function RootNavigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={token ? DASHBOARD_ROUTE : LOGIN_ROUTE}>
+      <Stack.Navigator initialRouteName={token ? NOTIF_ROUTE : LOGIN_ROUTE}>
         <Stack.Screen
           name={DASHBOARD_ROUTE}
           options={{
@@ -60,6 +63,7 @@ export default function RootNavigation() {
         <Stack.Screen name={CART_ROUTE} component={CartScreen} />
         <Stack.Screen name={ORDER_ROUTE} component={OrderScreen} />
         <Stack.Screen name={LOGIN_ROUTE} component={LoginScreen} />
+        <Stack.Screen name={NOTIF_ROUTE} component={Notif} />
       </Stack.Navigator>
     </NavigationContainer>
   );
