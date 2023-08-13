@@ -1,4 +1,4 @@
-import { Button, Center, Text } from "native-base";
+import { Button } from "native-base";
 import { useEffect, useState } from "react";
 import { getCarts } from "../../../../api/cart";
 import { Cart } from "../../../../api/cart/model";
@@ -49,7 +49,7 @@ export default function CartScreen({ navigation }: CartRouteProps) {
         amount: totalAmount,
         order_detail: orderDetail,
       });
-      console.log()
+      console.log();
     } catch (err) {
       console.log(err, "err");
     } finally {
@@ -94,24 +94,17 @@ export default function CartScreen({ navigation }: CartRouteProps) {
 
   return (
     <ContentWrapper>
-      {!data.length ? (
-        <Center h="full">
-          <Text>Tidak ada item</Text>
-        </Center>
-      ) : (
-        <>
-          <Button m={3} isLoading={loadingOrder} onPress={order}>
-            Order
-          </Button>
-          <ListContainer<Cart>
-            loading={loading}
-            data={data}
-            item={(item) => (
-              <CartItem callbackDelete={fetchCarts} {...item} key={item._id} />
-            )}
-          />
-        </>
-      )}
+      <Button m={3} isLoading={loadingOrder} onPress={order}>
+        Order
+      </Button>
+      <ListContainer<Cart>
+        loading={loading}
+        data={data}
+        onRefresh={fetchCarts}
+        item={(item) => (
+          <CartItem callbackDelete={fetchCarts} {...item} key={item._id} />
+        )}
+      />
     </ContentWrapper>
   );
 }

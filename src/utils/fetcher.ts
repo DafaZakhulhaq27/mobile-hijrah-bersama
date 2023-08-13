@@ -41,7 +41,8 @@ export async function fetcher<T>({
     headers.authorization = `Bearer ${token}`;
   }
 
-  const isGetMethod = options?.method === "GET";
+  const isNotMutation =
+    options?.method === "GET" || options?.method === "DELETE";
   const body =
     options?.body instanceof FormData
       ? options.body
@@ -50,7 +51,7 @@ export async function fetcher<T>({
   const init: RequestInit = {
     method: options?.method || "GET",
     headers,
-    body: isGetMethod ? null : body,
+    body: isNotMutation ? undefined : body,
   };
 
   const res = await fetch(url, init);

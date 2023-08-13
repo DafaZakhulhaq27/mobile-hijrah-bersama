@@ -9,7 +9,7 @@ import { HomeRouteProps } from "../../../../navigation/types";
 import CategoryItem from "./categoryItem";
 
 export default function Home({ navigation }: HomeRouteProps) {
-  const { loading, categories, setSearch } = useCategories();
+  const { loading, categories, setSearch, getCategory } = useCategories();
 
   return (
     <ContentWrapper>
@@ -21,6 +21,7 @@ export default function Home({ navigation }: HomeRouteProps) {
       <ListContainer<Category>
         loading={loading}
         data={categories}
+        onRefresh={getCategory}
         item={(data) => (
           <CategoryItem
             key={data._id}

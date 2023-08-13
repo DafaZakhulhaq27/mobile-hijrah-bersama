@@ -28,6 +28,7 @@ export default function useCategories() {
   }, [search]);
 
   return {
+    getCategory,
     categories,
     loading,
     setSearch,

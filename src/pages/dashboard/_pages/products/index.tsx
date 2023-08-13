@@ -44,6 +44,7 @@ export default function ProductsScreen({ route }: ProductsRouteProps) {
       <ListContainer<Product>
         loading={loading}
         data={products}
+        onRefresh={fetchData}
         item={(item) => <ProductItem {...item} key={item._id} />}
       />
     </ContentWrapper>
