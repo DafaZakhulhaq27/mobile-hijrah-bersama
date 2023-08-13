@@ -4,6 +4,7 @@ import { Button, VStack, useToast } from "native-base";
 import { FormProvider, useForm } from "react-hook-form";
 import { login } from "../../../api/auth";
 import InputText from "../../../components/form/inputText";
+import { useNotificationContext } from "../../../hooks/context";
 import {
   CHANGE_PASSWORD_ROUTE,
   DASHBOARD_ROUTE,
@@ -15,6 +16,7 @@ import { LoginForm, UserProfile, initLoginForm, loginForm } from "./model";
 
 export default function LoginScreen({ navigation }: LoginRouteProps) {
   const toast = useToast();
+  const { tokenExpoPushNotif } = useNotificationContext();
   const methods = useForm<LoginForm>({
     mode: "onTouched",
     resolver: zodResolver(loginForm),
@@ -28,7 +30,7 @@ export default function LoginScreen({ navigation }: LoginRouteProps) {
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      const res = await login({ ...data, fb_token: "xxx" });
+      const res = await login({ ...data, fb_token: tokenExpoPushNotif ?? "" });
       if (res.status) {
         toast.show({
           description: "login success",

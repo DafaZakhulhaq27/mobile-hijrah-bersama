@@ -1,5 +1,6 @@
 import { fetcher } from "../../utils/fetcher";
 import { MainResponse } from "../response";
+import { CreateOrderResponse, GetCurrentOrderResposne } from "./model";
 
 type OrderForm = {
   amount: number;
@@ -12,7 +13,7 @@ type OrderForm = {
 };
 
 export const createOrder = async (form: OrderForm) =>
-  fetcher<MainResponse>({
+  fetcher<CreateOrderResponse>({
     path: "/v1/checkout/process_transaction",
     options: {
       method: "POST",
@@ -20,13 +21,13 @@ export const createOrder = async (form: OrderForm) =>
     },
   });
 
-export const orderStatusCheck = async () =>
+export const getOrderStatusCheck = async () =>
   fetcher<MainResponse>({
-    path: "/v1/checkout/status",
+    path: "/v1/checkout/cek_status",
   });
 
 export const getCurrentOrder = async () =>
-  fetcher<MainResponse>({
+  fetcher<GetCurrentOrderResposne>({
     path: "/v1/checkout/cek_curent_order",
   });
 

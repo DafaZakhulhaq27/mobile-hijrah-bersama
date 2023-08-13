@@ -2,10 +2,16 @@ import { Button } from "native-base";
 import { useEffect, useState } from "react";
 import { getCarts } from "../../../../api/cart";
 import { Cart } from "../../../../api/cart/model";
-import { createOrder, getCurrentOrder } from "../../../../api/order";
+import {
+  createOrder,
+  getCurrentOrder,
+  getOrderStatusCheck,
+} from "../../../../api/order";
+import { DataPayment } from "../../../../api/order/model";
 import ContentWrapper from "../../../../components/contentWrapper";
 import ListContainer from "../../../../components/list/container";
 import Loading from "../../../../components/list/loading";
+import { ORDER_ROUTE } from "../../../../navigation/routesNames";
 import { CartRouteProps } from "../../../../navigation/types";
 import CartItem from "./cartItem";
 
@@ -15,6 +21,7 @@ export default function CartScreen({ navigation }: CartRouteProps) {
   const [data, setData] = useState<Cart[]>([]);
 
   const [isOrderPending, setIsOrderPending] = useState(false);
+  const [paymentLink, setPaymentLink] = useState("");
   const [loadingCheckStatus, setLoadingCheckStatus] = useState(false);
 
   const fetchCarts = async () => {
@@ -27,7 +34,9 @@ export default function CartScreen({ navigation }: CartRouteProps) {
       const resCurrentOrder = await getCurrentOrder();
       if (!resCurrentOrder.status) {
         setIsOrderPending(true);
+        setPaymentLink(resCurrentOrder.link_payment);
       } else {
+        setPaymentLink("");
         setIsOrderPending(false);
       }
 
@@ -46,8 +55,13 @@ export default function CartScreen({ navigation }: CartRouteProps) {
   const fetchCekStatus = async () => {
     setLoadingCheckStatus(true);
     try {
-      const res = await getCurrentOrder();
-      console.log(res, "res");
+      const res = await getOrderStatusCheck();
+      if (res.status) {
+        fetchCarts();
+        alert("Order berhasil dibayar");
+      } else {
+        alert("Order belum dibayar");
+      }
     } catch (err) {
       console.log(err, "err");
     } finally {
@@ -73,8 +87,10 @@ export default function CartScreen({ navigation }: CartRouteProps) {
         order_detail: orderDetail,
       });
       if (res.status || res.message === "berhasil") {
-        alert("Order Berhasil Dibuat");
-        fetchCarts();
+        const dataPayment: DataPayment = JSON.parse(res.dataPayment.response);
+        navigation.replace(ORDER_ROUTE, {
+          redirect_url: dataPayment.redirect_url,
+        });
       } else {
         alert(res.message);
       }
@@ -96,14 +112,16 @@ export default function CartScreen({ navigation }: CartRouteProps) {
   return (
     <ContentWrapper>
       {isOrderPending ? (
-        <Button
-          m={3}
-          isLoading={loadingCheckStatus}
-          onPress={fetchCekStatus}
-          colorScheme="lime"
-        >
-          Cek Payment Status Order
-        </Button>
+        <>
+          <Button
+            m={3}
+            isLoading={loadingCheckStatus}
+            onPress={fetchCekStatus}
+            colorScheme="lime"
+          >
+            Check Payment Status Order
+          </Button>
+        </>
       ) : (
         !!data.length && (
           <Button m={3} isLoading={loadingOrder} onPress={order}>
@@ -111,6 +129,18 @@ export default function CartScreen({ navigation }: CartRouteProps) {
           </Button>
         )
       )}
+      {paymentLink ? (
+        <Button
+          mx={3}
+          mb={3}
+          onPress={() =>
+            navigation.replace(ORDER_ROUTE, { redirect_url: paymentLink })
+          }
+          colorScheme="amber"
+        >
+          how to pay
+        </Button>
+      ) : null}
 
       <ListContainer<Cart>
         loading={loading}

@@ -47,7 +47,7 @@ export default function CartItem({ _id, product, callbackDelete }: Props) {
       <Box m={3}>
         <Flex flexDirection="row" flexWrap="wrap" mb={2}>
           <LabelValue label="Program" value={program} />
-          <LabelValue label="Seat" value={seat} />
+          <LabelValue label="Seat" value={seat.toString()} />
           <LabelValue label="Price" value={`$${price.toLocaleString()}`} />
         </Flex>
         <LabelValue

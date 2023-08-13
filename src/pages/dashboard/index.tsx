@@ -2,11 +2,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import * as SecureStore from "expo-secure-store";
 import { Flex, Icon, Pressable } from "native-base";
+import { DevSettings } from "react-native";
 import { COLOR_PRIMARY } from "../../config/constant";
 import {
   CART_ROUTE,
   HOME_ROUTE,
-  LOGIN_ROUTE,
   PRODUCTS_ROUTE,
 } from "../../navigation/routesNames";
 import { DashboardRouteProps } from "../../navigation/types";
@@ -52,7 +52,7 @@ export default function DashboardScreen({ navigation }: DashboardRouteProps) {
             <Pressable
               onPress={async () => {
                 await SecureStore.deleteItemAsync("token");
-                navigation.replace(LOGIN_ROUTE);
+                DevSettings.reload();
               }}
               mr="1"
             >
