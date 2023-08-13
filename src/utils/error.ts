@@ -1,3 +1,6 @@
+import * as SecureStore from "expo-secure-store";
+import { DevSettings } from "react-native";
+
 export interface ErrorJson {
   // error: string === error.message
   // statusCode: number === error.code
@@ -16,7 +19,8 @@ export async function catchBackendError<T>(res: Response) {
     }
 
     if (message === "jwt expired") {
-      console.log("halo");
+      await SecureStore.deleteItemAsync("token");
+      DevSettings.reload();
     }
 
     console.log(`=> ${res.url} code`, message, res.status);
