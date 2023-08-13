@@ -13,7 +13,7 @@ type OrderForm = {
 
 export const createOrder = async (form: OrderForm) =>
   fetcher<MainResponse>({
-    path: "/api/v1/checkout/process_transaction",
+    path: "/v1/checkout/process_transaction",
     options: {
       method: "POST",
       body: form,
@@ -22,10 +22,15 @@ export const createOrder = async (form: OrderForm) =>
 
 export const orderStatusCheck = async () =>
   fetcher<MainResponse>({
-    path: "/api/v1/checkout/status",
+    path: "/v1/checkout/status",
+  });
+
+export const getCurrentOrder = async () =>
+  fetcher<MainResponse>({
+    path: "/v1/checkout/cek_curent_order",
   });
 
 export const getListOrder = async () =>
   fetcher<MainResponse>({
-    path: "/api/v1/checkout/list_order",
+    path: "/v1/checkout/list_order",
   });
