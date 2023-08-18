@@ -1,5 +1,5 @@
 import { Button } from "native-base";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getCarts } from "../../../../api/cart";
 import { Cart } from "../../../../api/cart/model";
 import {
@@ -23,6 +23,7 @@ export default function CartScreen({ navigation }: CartRouteProps) {
   const [isOrderPending, setIsOrderPending] = useState(false);
   const [paymentLink, setPaymentLink] = useState("");
   const [loadingCheckStatus, setLoadingCheckStatus] = useState(false);
+  const isMounted = useRef(true); // Add this useRef hook
 
   const fetchCarts = async () => {
     setLoading(true);
@@ -69,6 +70,12 @@ export default function CartScreen({ navigation }: CartRouteProps) {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      isMounted.current = false; // Set to false when the component unmounts
+    };
+  }, []);
+
   const order = async () => {
     const totalAmount = data.reduce(
       (total, item) => total + item.product.price,
@@ -86,13 +93,15 @@ export default function CartScreen({ navigation }: CartRouteProps) {
         amount: totalAmount,
         order_detail: orderDetail,
       });
-      if (res.status || res.message === "berhasil") {
-        const dataPayment: DataPayment = JSON.parse(res.dataPayment.response);
-        navigation.replace(ORDER_ROUTE, {
-          redirect_url: dataPayment.redirect_url,
-        });
-      } else {
-        alert(res.message);
+      if (isMounted.current) {
+        if (res.status || res.message === "berhasil") {
+          const dataPayment: DataPayment = JSON.parse(res.dataPayment.response);
+          navigation.replace(ORDER_ROUTE, {
+            redirect_url: dataPayment.redirect_url,
+          });
+        } else {
+          alert(res.message);
+        }
       }
     } catch (err) {
       console.log(err, "err");
