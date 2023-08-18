@@ -22,5 +22,5 @@ export type UserProfile = {
   status: "Active" | "Suspend";
   role: "User" | "Admin" | "Master";
   address: string;
-  is_new_login: boolean;
+  is_new_login: string;
 };

@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }: LoginRouteProps) {
         });
         await SecureStore.setItemAsync("token", res.data.token);
         const profileUser = decodeJwt<UserProfile>(res.data.token);
-        if (profileUser.is_new_login) {
+        if (JSON.parse(profileUser.is_new_login)) {
           navigation.replace(CHANGE_PASSWORD_ROUTE);
         } else {
           navigation.replace(DASHBOARD_ROUTE);

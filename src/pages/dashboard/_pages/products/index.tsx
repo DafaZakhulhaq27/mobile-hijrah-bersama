@@ -7,9 +7,11 @@ import { ProductsRouteProps } from "../../../../navigation/types";
 import Category from "./category";
 import ProductItem from "./productItem";
 import { Product } from "./types";
+import SearchBar from "../../../../components/searchBar";
 
 export default function ProductsScreen({ route }: ProductsRouteProps) {
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
 
   const fetchData = async () => {
@@ -18,6 +20,7 @@ export default function ProductsScreen({ route }: ProductsRouteProps) {
       const res = await getProduct({
         limit: "9999",
         page: "1",
+        search: search,
         category: route.params?._id,
       });
       setProducts(res.data);
@@ -30,7 +33,7 @@ export default function ProductsScreen({ route }: ProductsRouteProps) {
 
   useEffect(() => {
     fetchData();
-  }, [route.params]);
+  }, [route.params, search]);
 
   return (
     <ContentWrapper>
@@ -41,6 +44,10 @@ export default function ProductsScreen({ route }: ProductsRouteProps) {
           All Products :
         </Text>
       )}
+      <SearchBar
+        placeholder="Search Products"
+        onChangeText={(v) => setSearch(v)}
+      />
       <ListContainer<Product>
         loading={loading}
         data={products}
