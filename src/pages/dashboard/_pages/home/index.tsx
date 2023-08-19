@@ -7,9 +7,33 @@ import useCategories from "../../../../hooks/categories";
 import { PRODUCTS_ROUTE } from "../../../../navigation/routesNames";
 import { HomeRouteProps } from "../../../../navigation/types";
 import CategoryItem from "./categoryItem";
-
+import { useEffect } from "react";
+import * as Location from "expo-location";
+import { BackHandler, Alert } from "react-native";
+import { setCoordinate } from "../../../../api/auth";
 export default function Home({ navigation }: HomeRouteProps) {
   const { loading, categories, setSearch, getCategory } = useCategories();
+
+  // set current location
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Permission Denied", "Location Permission must allowed", [
+          { text: "OK", onPress: () => BackHandler.exitApp() },
+        ]);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      if (location.coords) {
+        await setCoordinate({
+          lat: location.coords.altitude?.toString() ?? "",
+          long: location.coords.longitude?.toString() ?? "",
+        });
+      }
+    })();
+  }, []);
 
   return (
     <ContentWrapper>
