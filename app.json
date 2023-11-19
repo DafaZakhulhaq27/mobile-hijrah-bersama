@@ -23,22 +23,33 @@
       }
     },
     "android": {
-      "package" : "com.hijrah.bersama",
-      "googleServicesFile" : "google-services.json",
+      "package": "com.hijrah.bersama",
+      "googleServicesFile": "google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },"plugins": [
+    },
+    "plugins": [
       [
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ae7f40a7-134b-4be9-977f-690d5e1138ca"
+      }
+    }
   }
 }
